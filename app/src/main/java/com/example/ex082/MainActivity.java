@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         else{
             lv.setAdapter(null);
+            capital.setText("");
+            population.setText("");
+            language.setText("");
+            anthem.setText("");
         }
     }
 
