@@ -19,29 +19,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     int selectedContinet;
 
     String[] continent = {"Continent", "America", "Africa", "Asia", "Europe"};
-    String[][] america = {{"Brazil", "Chile", "Argentina ", "Peru", "Venezuela", "Mexico","USA"},
-                          {"Brasília", "Santiago", "Buenos Aires", "Lima", "Caracas", "Mexico City","Washington, D.C."},
-                          {"210,147,125", "17,574,003", "44,938,712", "32,824,358", "28,887,118", "128,649,565","328,239,523"},
-                          {"Portuguese", "Spanish", "Spanish", "Spanish", "Spanish", "Spanish","English"},
-                          {"Hino Nacional Brasileiro", "Himno Nacional de Chile", "Himno Nacional Argentino", "Himno Nacional del Perú", "Gloria al Bravo Pueblo", "Himno Nacional Mexicano","The Star-Spangled Banner"}};
+    String [][] countries  = {{"Brazil", "Chile", "Argentina ", "Peru", "Venezuela", "Mexico","USA"},
+                           {"Sudan", "Morocco", "Algeria", "Egypt", "Chad", "Cameroon","Ethiopia"},
+                           {"Israel", "Japan", "India", "Russia", "Iran", "Iraq","China"},
+                           {"Spain", "Italy", "France", "Germany", "Netherlands", "Portugal","United Kingdom"}};
 
-    String[][] africa = {{"Sudan", "Morocco", "Algeria", "Egypt", "Chad", "Cameroon","Ethiopia"},
-                         {"Khartoum", "Rabat", "Algiers", "Cairo", "N'Djamena", "Yaoundé","Addis Ababa"},
-                         {"41,592,539", "36,472,000", "43,600,000", "100,075,480", "13,670,084", "26,545,864","109,224,414"},
-                        {"Arabic", "Moroccan Arabic, French", "Arabic, Berber", "Arabic", "Arabic, French", "English, French","Amharic"},
-                        {"نحن جند الله، جند الوطن", "النشيد الوطني المغربي", "We Pledge - قسامان", "بلادي، بلادي، بلادي - My country, my country, my country", "The Chadian Hymn - La Tchadienne", "O Cameroon, Cradle of our Forefathers","March Forward, Dear Mother Ethiopia"}};
+    String [][] details = {{"Brasília", "210,147,125", "Portuguese", "Hino Nacional Brasileiro"}, // America
+            {"Santiago","17,574,003","Spanish","Himno Nacional de Chile"},
+            {"Buenos Aires","44,938,712", "Spanish","Himno Nacional Argentino"},
+            {"Lima","32,824,358","Spanish","Himno Nacional del Perú"},
+            {"Caracas","28,887,118","Spanish","Gloria al Bravo Pueblo"},
+            {"Mexico City","128,649,565","Spanish", "Himno Nacional Mexicano"},
+            {"Washington, D.C.","328,239,523","English","The Star-Spangled Banner"},
+            {"Khartoum","41,592,539","Arabic","نحن جند الله، جند الوطن"}, // Africa
+            {"Rabat","36,472,000","Moroccan Arabic, French","النشيد الوطني المغربي"},
+            {"Algiers","43,600,000","Arabic, Berber","We Pledge - قسامان"},
+            {"Cairo","100,075,480", "Arabic","بلادي، بلادي، بلادي - My country, my country, my country"},
+            {"N'Djamena","13,670,084","Arabic, French","The Chadian Hymn - La Tchadienne"},
+            {"Yaoundé", "26,545,864","English, French","O Cameroon, Cradle of our Forefathers"},
+            {"Addis Ababa","109,224,414","Amharic","March Forward, Dear Mother Ethiopia"},
+            {"Jerusalem","9,256,580","Hebrew","The Hope - התקווה"}, // Asia
+            {"Tokyo","125,960,000","Japanese","Kimigayo - 君が代"},
+            {"New Delhi","1,352,642,280", "Hindi, Indian English","Jana Gana Mana"},
+            {"Moscow", "146,748,590","Russian","Государственный гимн Российской Федерации"},
+            {"Tehran","83,183,741","Persian", "استقلال، آزادی، جمهوری اسلامی"},
+            {"Baghdad","38,433,600","Arabic, Kurdish"," موطني - My Homeland"},
+            {"Beijing","1,400,050,000","Standard Chinese","March of the Volunteers - 义勇军进行曲"},
+            {"Madrid","47,431,256","Spanish","Marcha Real"}, // Europe
+            {"Rome","60,317,116","Italian","Canto degli Italiani"},
+            {"Paris","67,081,000","French","Liberté, égalité, fraternité"},
+            {"Berlin","83,166,711","German","Deutschlandlied"},
+            {"Amsterdam","17,418,808","Dutch, English, Papiamentu", "Wilhelmus van Nassouwe"},
+            {"Portugal","10,295,909","Portuguese","A Portuguesa"},
+            {"London","67,886,004","English","God Save the Queen"}};
 
-    String[][] asia = {{"Israel", "Japan", "India", "Russia", "Iran", "Iraq","China"},
-                        {"Jerusalem", "Tokyo", "New Delhi", "Moscow", "Tehran", "Baghdad","Beijing"},
-                        {"9,256,580", "125,960,000", "1,352,642,280", "146,748,590", "83,183,741", "38,433,600","1,400,050,000"},
-                        {"Hebrew", "Japanese", "Hindi, Indian English", "Russian", "Persian", "Arabic, Kurdish","Standard Chinese"},
-                        {" The Hope - התקווה", "Kimigayo - 君が代", "Jana Gana Mana", "Государственный гимн Российской Федерации", "استقلال، آزادی، جمهوری اسلامی", " موطني - My Homeland","March of the Volunteers - 义勇军进行曲"}};
-
-    String[][] europe = {{"Spain", "Italy", "France", "Germany", "Netherlands", "Portugal","United Kingdom"},
-                        {"Madrid", "Rome", "Paris", "Berlin", "Amsterdam", "Portugal","London"},
-                        {"47,431,256", "60,317,116", "67,081,000", "83,166,711", "17,418,808", "10,295,909","67,886,004"},
-                        {"Spanish", "Italian", "French", "German", "Dutch, English, Papiamentu", "Portuguese","English"},
-                        {"Marcha Real", "Canto degli Italiani", "Liberté, égalité, fraternité", "Deutschlandlied", "Wilhelmus van Nassouwe", "A Portuguesa","God Save the Queen"},};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,58 +75,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (position){
-            case 1:{
-                capital.setText("");
-                population.setText("");
-                language.setText("");
-                anthem.setText("");
-                adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, america[0]);
-                selectedContinet = 1;
-                lv.setAdapter(adp);
-            }
-            break;
-
-            case 2:{
-                capital.setText("");
-                population.setText("");
-                language.setText("");
-                anthem.setText("");
-                adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, africa[0]);
-                selectedContinet = 2;
-                lv.setAdapter(adp);
-            }
-            break;
-
-            case 3:{
-                capital.setText("");
-                population.setText("");
-                language.setText("");
-                anthem.setText("");
-                adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, asia[0]);
-                selectedContinet = 3;
-                lv.setAdapter(adp);
-            }
-            break;
-
-            case 4:{
-                capital.setText("");
-                population.setText("");
-                language.setText("");
-                anthem.setText("");
-                adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, europe[0]);
-                selectedContinet = 4;
-                lv.setAdapter(adp);
-            }
-            break;
-
-            default:{
-                capital.setText("");
-                population.setText("");
-                language.setText("");
-                anthem.setText("");
-                lv.setAdapter(null);
-            }
+        if (position != 0){
+            capital.setText("");
+            population.setText("");
+            language.setText("");
+            anthem.setText("");
+            selectedContinet = position-1;
+            adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, countries[selectedContinet]);
+            lv.setAdapter(adp);
+        }
+        else{
+            lv.setAdapter(null);
         }
     }
 
@@ -125,45 +95,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (selectedContinet){
-            case 1:{
-                capital.setText(america[1][position]);
-                population.setText(america[2][position]);
-                language.setText(america[3][position]);
-                anthem.setText(america[4][position]);
-            }
-            break;
-
-            case 2:{
-                capital.setText(africa[1][position]);
-                population.setText(africa[2][position]);
-                language.setText(africa[3][position]);
-                anthem.setText(africa[4][position]);
-            }
-            break;
-
-            case 3:{
-                capital.setText(asia[1][position]);
-                population.setText(asia[2][position]);
-                language.setText(asia[3][position]);
-                anthem.setText(asia[4][position]);
-            }
-            break;
-
-            case 4:{
-                capital.setText(europe[1][position]);
-                population.setText(europe[2][position]);
-                language.setText(europe[3][position]);
-                anthem.setText(europe[4][position]);
-            }
-            break;
-
-            default:{
-                capital.setText("");
-                population.setText("");
-                language.setText("");
-                anthem.setText("");
-            }
-        }
+        capital.setText(details[selectedContinet*7+position][0]);
+        population.setText(details[selectedContinet*7+position][1]);
+        language.setText(details[selectedContinet*7+position][2]);
+        anthem.setText(details[selectedContinet*7+position][3]);
     }
 }
