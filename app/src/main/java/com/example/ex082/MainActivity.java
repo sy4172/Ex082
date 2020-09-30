@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ListView lv;
     TextView capital, population, language, anthem;
     ArrayAdapter<String> adp;
-    int selectedContinet;
+    int selectContinent;
 
     String[] continent = {"Continent", "America", "Africa", "Asia", "Europe"};
     String [][] countries  = {{"Brazil", "Chile", "Argentina ", "Peru", "Venezuela", "Mexico","USA"},
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             population.setText("");
             language.setText("");
             anthem.setText("");
-            selectedContinet = position-1;
-            adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, countries[selectedContinet]);
+            selectContinent = position-1;
+            adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, countries[selectContinent]);
             lv.setAdapter(adp);
         }
         else{
@@ -99,9 +99,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        capital.setText(details[selectedContinet*7+position][0]);
-        population.setText(details[selectedContinet*7+position][1]);
-        language.setText(details[selectedContinet*7+position][2]);
-        anthem.setText(details[selectedContinet*7+position][3]);
+        capital.setText(details[selectContinent*7+position][0]);
+        population.setText(details[selectContinent*7+position][1]);
+        language.setText(details[selectContinent*7+position][2]);
+        anthem.setText(details[selectContinent*7+position][3]);
     }
 }
